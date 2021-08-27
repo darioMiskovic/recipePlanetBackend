@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using recipe_planet.Configuration;
 using recipe_planet.Data;
 using recipe_planet.Services;
 using System;
@@ -40,6 +41,8 @@ namespace recipe_planet
             //Configure the Services
             services.AddAuthentication();
             services.ConfigureIdentity();
+
+            services.AddAutoMapper(typeof(MapperInitializer));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
