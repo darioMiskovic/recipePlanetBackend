@@ -41,7 +41,11 @@ namespace recipe_planet
             //Configure the Services
             services.AddAuthentication();
             services.ConfigureIdentity();
+
             services.AddTransient<AccountService>();
+            services.AddTransient<MyRecipeService>();
+            //services.AddTransient<MyRecipeService>();
+            //services.AddTransient<MyRecipeService>();
 
             services.AddAutoMapper(typeof(MapperInitializer));
 
