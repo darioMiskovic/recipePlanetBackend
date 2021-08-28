@@ -41,17 +41,17 @@ namespace recipe_planet.Controllers
 
         //Http GET
         [HttpGet("my-recipes/{userId}")]
-        public IActionResult GetMyRecipesById(string userId)
+        public async Task<IActionResult> GetMyRecipesById(string userId)
         {
-            var recipes = _myRecipeService.GetMyRecipesById(userId);
+            var recipes = await _myRecipeService.GetMyRecipesById(userId);
             return Ok(recipes);
         }
 
 
         [HttpGet("my-recipe-info/{recipeId}")]
-        public IActionResult MyRecipeInfo(int recipeId)
+        public async Task<IActionResult> MyRecipeInfo(int recipeId)
         {
-            var recipes = _myRecipeService.MyRecipeInfo(recipeId);
+            var recipes = await _myRecipeService.MyRecipeInfo(recipeId);
             return Ok(recipes);
         }
 

@@ -29,16 +29,17 @@ namespace recipe_planet.Services
         }
 
 
-        public IQueryable<MyRecipe> GetMyRecipesById(string id)
+        public async Task<List<MyRecipeDTO>> GetMyRecipesById(string id)
         {
-            return _context.MyRecipes.Where(n => n.UserId == id); 
+            var myRecipes = await _context.MyRecipes.Where(n => n.UserId == id).ToListAsync();
+            return _mapper.Map<List<MyRecipeDTO>>(myRecipes);
         }
 
-        public MyRecipe MyRecipeInfo(int id)
+        public async Task<MyRecipeDTO> MyRecipeInfo(int id)
         {
-            var myRecipe = _context.MyRecipes.Include(n => n.Ingredients).Where(recipe => recipe.Id == id).FirstOrDefault();
-            //var res = _mapper.Map<MyRecipeDTO>(myRecipe);
-            return myRecipe;
+            var myRecipe = await _context.MyRecipes.Include(n => n.Ingredients).Where(recipe => recipe.Id == id).FirstOrDefaultAsync();
+            return _mapper.Map<MyRecipeDTO>(myRecipe);
+            
         }
     }
 }
