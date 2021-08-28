@@ -34,7 +34,7 @@ namespace recipe_planet.Models
         public bool my_recipe { get; set; }
 
         [Required]
-        public List<IngredientDTO> Ingredients { get; set; }
+        public List<CreateIngredientDTO> Ingredients { get; set; }
 
         [Required]
         public string UserId { get; set; }
@@ -46,5 +46,6 @@ namespace recipe_planet.Models
         public int Id { get; set; }
 
         public UserDTO User { get; set; }
+
     }
 }

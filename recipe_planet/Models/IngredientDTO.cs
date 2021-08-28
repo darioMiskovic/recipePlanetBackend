@@ -15,8 +15,9 @@ namespace recipe_planet.Models
         public string unit { get; set; }
         [Required]
         public string description { get; set; }
-        [Required]
+        
         public int MyRecipeId { get; set; }
+
     }
 
     public class IngredientDTO : CreateIngredientDTO

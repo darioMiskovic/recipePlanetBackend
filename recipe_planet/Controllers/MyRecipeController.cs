@@ -21,22 +21,40 @@ namespace recipe_planet.Controllers
             _myRecipeService = myRecipeService;
         }
 
-        [HttpPost("add-my-recipe")]
-        public IActionResult AddMyRecipe([FromBody] CreateMyRecipeDTO myRecipe)
+        //Http POST
+        [HttpPost("add-my-recipe" , Name ="AddMyRecipe")]
+        public async Task<IActionResult> AddMyRecipe([FromBody] CreateMyRecipeDTO myRecipe)
         {
             if (!ModelState.IsValid) BadRequest(ModelState);
 
             try
             {
-                var recipe = _myRecipeService.AddMyRecipe(myRecipe);
+                var _myRecipe = await _myRecipeService.AddMyRecipe(myRecipe);
 
-                return Ok(recipe);
+                return CreatedAtRoute("AddMyRecipe", new { id = _myRecipe.Id}, _myRecipe);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                throw ex;
+                return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
-       
+
+        //Http GET
+        [HttpGet("my-recipes/{userId}")]
+        public IActionResult GetMyRecipesById(string userId)
+        {
+            var recipes = _myRecipeService.GetMyRecipesById(userId);
+            return Ok(recipes);
+        }
+
+
+        [HttpGet("my-recipe-info/{recipeId}")]
+        public IActionResult MyRecipeInfo(int recipeId)
+        {
+            var recipes = _myRecipeService.MyRecipeInfo(recipeId);
+            return Ok(recipes);
+        }
+
+
     }
 }

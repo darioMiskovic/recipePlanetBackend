@@ -14,6 +14,7 @@ using recipe_planet.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace recipe_planet
@@ -49,7 +50,11 @@ namespace recipe_planet
 
             services.AddAutoMapper(typeof(MapperInitializer));
 
-            services.AddControllers();
+            //services.AddControllers();
+
+            services.AddControllers().AddNewtonsoftJson(x =>
+                 x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "recipe_planet", Version = "v1" });

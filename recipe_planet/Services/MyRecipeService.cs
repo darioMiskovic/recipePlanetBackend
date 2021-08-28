@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using recipe_planet.Data;
 using recipe_planet.Models;
 using System;
@@ -11,7 +12,7 @@ namespace recipe_planet.Services
 {
     public class MyRecipeService
     {
-        private  AppDbContext _context;
+        private AppDbContext _context;
         private readonly IMapper _mapper;
         public MyRecipeService(AppDbContext context, IMapper mapper)
         {
@@ -19,20 +20,25 @@ namespace recipe_planet.Services
             _mapper = mapper;
         }
 
-        public MyRecipe AddMyRecipe(CreateMyRecipeDTO myRecipe)
+        public async Task<MyRecipe> AddMyRecipe(CreateMyRecipeDTO myRecipe)
         {
-            try
-            {
-                var _myRecipe = _mapper.Map<MyRecipe>(myRecipe);
-                //_context.MyRecipes.Add(_myRecipe);
-                //_context.SaveChanges();
-                return _myRecipe;
+            var _myRecipe = _mapper.Map<MyRecipe>(myRecipe);
+            await _context.MyRecipes.AddAsync(_myRecipe);
+            await _context.SaveChangesAsync();
+            return _myRecipe;
+        }
 
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Please enter valid inputs!{ex}");
-            }
+
+        public IQueryable<MyRecipe> GetMyRecipesById(string id)
+        {
+            return _context.MyRecipes.Where(n => n.UserId == id); 
+        }
+
+        public MyRecipe MyRecipeInfo(int id)
+        {
+            var myRecipe = _context.MyRecipes.Include(n => n.Ingredients).Where(recipe => recipe.Id == id).FirstOrDefault();
+            //var res = _mapper.Map<MyRecipeDTO>(myRecipe);
+            return myRecipe;
         }
     }
 }
