@@ -13,7 +13,7 @@ namespace recipe_planet.Services
 {
     public class AccountService
     {
-       
+
 
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
@@ -24,22 +24,12 @@ namespace recipe_planet.Services
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> RegisterAccount(UserDTO userDTO, ModelStateDictionary ModelState)
+        public async Task<IdentityResult> RegisterAccount(UserDTO userDTO)
         {
             var user = _mapper.Map<User>(userDTO);
             user.UserName = userDTO.Email;
-            var result = await _userManager.CreateAsync(user, userDTO.Password);
+            return await _userManager.CreateAsync(user, userDTO.Password);
 
-            if (!result.Succeeded)
-            {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(error.Code, error.Description);
-                }
-                return  new BadRequestObjectResult (ModelState);
-            }
-
-            return Accepted();
         }
     }
 }
