@@ -53,14 +53,25 @@ namespace recipe_planet.Services
             }
 
             _mapper.Map(myRecipe, _fetchMyRecipe);
-           
              _context.MyRecipes.Update(_fetchMyRecipe);
             await _context.SaveChangesAsync();
 
             return _fetchMyRecipe;
 
-         
-            
+        }
+
+        public async Task<bool> DeleteMyRecipeById(int id)
+        {
+            var myRecipe = await _context.MyRecipes.FindAsync(id);
+            if (myRecipe == null)
+            {
+                throw new Exception("Submited data is invalid");
+            }
+
+             _context.MyRecipes.Remove(myRecipe);
+            await _context.SaveChangesAsync();
+
+            return true;
         }
     }
 }

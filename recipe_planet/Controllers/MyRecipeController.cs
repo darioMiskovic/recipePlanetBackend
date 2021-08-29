@@ -70,5 +70,13 @@ namespace recipe_planet.Controllers
         }
 
 
+        //Http DELETE//
+        [HttpDelete("my-recipe-delete/{recipeId}")]
+        public async Task<IActionResult> MyRecipeDeleteById(int recipeId)
+        {
+            var isDeleted = await _myRecipeService.DeleteMyRecipeById(recipeId);
+            return Ok(isDeleted);
+        }
+
     }
 }
