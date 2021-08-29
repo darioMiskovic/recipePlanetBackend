@@ -21,8 +21,6 @@ namespace recipe_planet.Controllers
             _myRecipeService = myRecipeService;
         }
 
-        //Http POST//
-
         //Add My Rcipe
         [HttpPost("add-my-recipe" , Name ="AddMyRecipe")]
         public async Task<IActionResult> AddMyRecipe([FromBody] CreateMyRecipeDTO myRecipe)
@@ -41,9 +39,7 @@ namespace recipe_planet.Controllers
             }
         }
 
-        //Http GET//
-
-        //My Recipes List
+        //Get My Recipes List
         [HttpGet("my-recipes/{userId}")]
         public async Task<IActionResult> GetMyRecipesById(string userId)
         {
@@ -51,7 +47,7 @@ namespace recipe_planet.Controllers
             return Ok(recipes);
         }
 
-        //My Recipe Info
+        //Get My Recipe Info
         [HttpGet("my-recipe-info/{recipeId}")]
         public async Task<IActionResult> MyRecipeInfo(int recipeId)
         {
@@ -59,7 +55,7 @@ namespace recipe_planet.Controllers
             return Ok(recipes);
         }
 
-        //Http PUT//
+        //Update My Recipe
         [HttpPut("my-recipe-update/{recipeId}")]
         public async Task<IActionResult> MyRecipeUpdate(int recipeId, [FromBody] CreateMyRecipeDTO myRecipe)
         {
@@ -70,7 +66,7 @@ namespace recipe_planet.Controllers
         }
 
 
-        //Http DELETE//
+        //Delete My Recipe 
         [HttpDelete("my-recipe-delete/{recipeId}")]
         public async Task<IActionResult> MyRecipeDeleteById(int recipeId)
         {
