@@ -45,7 +45,7 @@ namespace recipe_planet
 
             services.AddTransient<AccountService>();
             services.AddTransient<MyRecipeService>();
-            //services.AddTransient<MyRecipeService>();
+            services.AddTransient<IngredientService>();
             //services.AddTransient<MyRecipeService>();
 
             services.AddAutoMapper(typeof(MapperInitializer));

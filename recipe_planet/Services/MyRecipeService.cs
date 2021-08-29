@@ -20,6 +20,7 @@ namespace recipe_planet.Services
             _mapper = mapper;
         }
 
+        //POST 
         public async Task<MyRecipe> AddMyRecipe(CreateMyRecipeDTO myRecipe)
         {
             var _myRecipe = _mapper.Map<MyRecipe>(myRecipe);
@@ -28,7 +29,7 @@ namespace recipe_planet.Services
             return _myRecipe;
         }
 
-
+        //GET 
         public async Task<List<MyRecipeDTO>> GetMyRecipesById(string id)
         {
             var myRecipes = await _context.MyRecipes.Where(n => n.UserId == id).ToListAsync();
@@ -42,6 +43,8 @@ namespace recipe_planet.Services
             
         }
 
+
+        //PUT 
         public async Task<MyRecipe> MyRecipeUpdate(int recipeId ,CreateMyRecipeDTO myRecipe)
         {
            
@@ -60,6 +63,7 @@ namespace recipe_planet.Services
 
         }
 
+        //DELETE 
         public async Task<bool> DeleteMyRecipeById(int id)
         {
             var myRecipe = await _context.MyRecipes.FindAsync(id);
