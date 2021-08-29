@@ -41,5 +41,26 @@ namespace recipe_planet.Services
             return _mapper.Map<MyRecipeDTO>(myRecipe);
             
         }
+
+        public async Task<MyRecipe> MyRecipeUpdate(int recipeId ,CreateMyRecipeDTO myRecipe)
+        {
+           
+            var _fetchMyRecipe = await _context.MyRecipes.FindAsync(recipeId);
+
+            if (_fetchMyRecipe == null)
+            {
+                throw new Exception("Submited data is invalid");
+            }
+
+            _mapper.Map(myRecipe, _fetchMyRecipe);
+           
+             _context.MyRecipes.Update(_fetchMyRecipe);
+            await _context.SaveChangesAsync();
+
+            return _fetchMyRecipe;
+
+         
+            
+        }
     }
 }

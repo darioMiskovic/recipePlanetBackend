@@ -21,7 +21,9 @@ namespace recipe_planet.Controllers
             _myRecipeService = myRecipeService;
         }
 
-        //Http POST
+        //Http POST//
+
+        //Add My Rcipe
         [HttpPost("add-my-recipe" , Name ="AddMyRecipe")]
         public async Task<IActionResult> AddMyRecipe([FromBody] CreateMyRecipeDTO myRecipe)
         {
@@ -39,7 +41,9 @@ namespace recipe_planet.Controllers
             }
         }
 
-        //Http GET
+        //Http GET//
+
+        //My Recipes List
         [HttpGet("my-recipes/{userId}")]
         public async Task<IActionResult> GetMyRecipesById(string userId)
         {
@@ -47,11 +51,21 @@ namespace recipe_planet.Controllers
             return Ok(recipes);
         }
 
-
+        //My Recipe Info
         [HttpGet("my-recipe-info/{recipeId}")]
         public async Task<IActionResult> MyRecipeInfo(int recipeId)
         {
             var recipes = await _myRecipeService.MyRecipeInfo(recipeId);
+            return Ok(recipes);
+        }
+
+        //Http PUT//
+        [HttpPut("my-recipe-update/{recipeId}")]
+        public async Task<IActionResult> MyRecipeUpdate(int recipeId, [FromBody] CreateMyRecipeDTO myRecipe)
+        {
+            if (!ModelState.IsValid) BadRequest(ModelState);
+
+            var recipes = await _myRecipeService.MyRecipeUpdate(recipeId, myRecipe);
             return Ok(recipes);
         }
 
