@@ -32,7 +32,8 @@ namespace recipe_planet.Controllers
             {
                 var _favorite = await _favoriteService.AddFavoriteRecipe(favorite);
 
-                return CreatedAtRoute("AddFavoriteRecipe", new { id = _favorite.Id }, _favorite);
+                
+                return Created(nameof(AddFavoriteRecipe), _favorite);
             }
             catch (Exception)
             {

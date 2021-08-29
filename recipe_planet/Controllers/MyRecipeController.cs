@@ -43,16 +43,32 @@ namespace recipe_planet.Controllers
         [HttpGet("my-recipes/{userId}")]
         public async Task<IActionResult> GetMyRecipesById(string userId)
         {
-            var recipes = await _myRecipeService.GetMyRecipesById(userId);
-            return Ok(recipes);
+            try
+            {
+                var recipes = await _myRecipeService.GetMyRecipesById(userId);
+                return Ok(recipes);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
 
         //Get My Recipe Info
         [HttpGet("my-recipe-info/{recipeId}")]
         public async Task<IActionResult> MyRecipeInfo(int recipeId)
         {
-            var recipes = await _myRecipeService.MyRecipeInfo(recipeId);
-            return Ok(recipes);
+            try
+            {
+                var recipes = await _myRecipeService.MyRecipeInfo(recipeId);
+                return Ok(recipes);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
 
         //Update My Recipe
@@ -61,8 +77,16 @@ namespace recipe_planet.Controllers
         {
             if (!ModelState.IsValid) BadRequest(ModelState);
 
-            var recipes = await _myRecipeService.MyRecipeUpdate(recipeId, myRecipe);
-            return Ok(recipes);
+            try
+            {
+                var recipes = await _myRecipeService.MyRecipeUpdate(recipeId, myRecipe);
+                return Ok(recipes);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
 
 
@@ -70,8 +94,16 @@ namespace recipe_planet.Controllers
         [HttpDelete("my-recipe-delete/{recipeId}")]
         public async Task<IActionResult> MyRecipeDeleteById(int recipeId)
         {
-            var isDeleted = await _myRecipeService.DeleteMyRecipeById(recipeId);
-            return Ok(isDeleted);
+            try
+            {
+                var isDeleted = await _myRecipeService.DeleteMyRecipeById(recipeId);
+                return Ok(isDeleted);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
 
     }

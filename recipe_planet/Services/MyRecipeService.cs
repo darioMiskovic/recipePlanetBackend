@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using recipe_planet.Data;
@@ -33,6 +34,9 @@ namespace recipe_planet.Services
         public async Task<List<MyRecipeDTO>> GetMyRecipesById(string id)
         {
             var myRecipes = await _context.MyRecipes.Where(n => n.UserId == id).ToListAsync();
+
+            //if(!myRecipes) new BadRe
+
             return _mapper.Map<List<MyRecipeDTO>>(myRecipes);
         }
 
@@ -41,6 +45,9 @@ namespace recipe_planet.Services
         public async Task<MyRecipeDTO> MyRecipeInfo(int id)
         {
             var myRecipe = await _context.MyRecipes.Include(n => n.Ingredients).Where(recipe => recipe.Id == id).FirstOrDefaultAsync();
+
+            if (myRecipe == null)  throw new Exception($"My Recipe with id: {id} does not exist");
+
             return _mapper.Map<MyRecipeDTO>(myRecipe);
             
         }

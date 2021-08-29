@@ -43,7 +43,7 @@ namespace recipe_planet.Controllers
                     {
                         ModelState.AddModelError(error.Code, error.Description);
                     }
-                    return new BadRequestObjectResult(ModelState);
+                    return BadRequest(ModelState);
                     
                 }
 
