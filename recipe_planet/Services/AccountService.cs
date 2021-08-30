@@ -57,7 +57,7 @@ namespace recipe_planet.Services
             return _mapper.Map<List<FavoriteDTO>>(user.Favorites);
         }
 
-        //Delete My Recipe 
+        //Delete User By Id 
         public async Task<IdentityResult> DeleteUserById(string id)
         {
             var user = await _userManager.FindByIdAsync(id);

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using recipe_planet.Models;
 using recipe_planet.Services;
 using System;
@@ -15,17 +16,22 @@ namespace recipe_planet.Controllers
     {
 
         private  MyRecipeService _myRecipeService;
+        private readonly ILogger<MyRecipeController> _logger;
 
-        public MyRecipeController(MyRecipeService myRecipeService)
+        public MyRecipeController(MyRecipeService myRecipeService, ILogger<MyRecipeController> logger)
         {
             _myRecipeService = myRecipeService;
+            _logger = logger;
         }
 
-        //Add My Rcipe
+        //Add My Recipe
         [HttpPost("add-my-recipe" , Name ="AddMyRecipe")]
         public async Task<IActionResult> AddMyRecipe([FromBody] CreateMyRecipeDTO myRecipe)
         {
-            if (!ModelState.IsValid) BadRequest(ModelState);
+            if (!ModelState.IsValid) {
+                _logger.LogError($"Invalid POST attempt in {nameof(AddMyRecipe)}");
+                BadRequest(ModelState);
+            }
 
             try
             {
@@ -33,8 +39,9 @@ namespace recipe_planet.Controllers
 
                 return CreatedAtRoute("AddMyRecipe", new { id = _myRecipe.Id}, _myRecipe);
             }
-            catch (Exception )
+            catch (Exception ex)
             {
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(AddMyRecipe)}");
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
@@ -52,7 +59,7 @@ namespace recipe_planet.Controllers
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(MyRecipeInfo)}");
                 return BadRequest(ex.Message);
             }
         }
@@ -61,7 +68,11 @@ namespace recipe_planet.Controllers
         [HttpPut("my-recipe-update/{recipeId}")]
         public async Task<IActionResult> MyRecipeUpdate(int recipeId, [FromBody] CreateMyRecipeDTO myRecipe)
         {
-            if (!ModelState.IsValid) BadRequest(ModelState);
+            if (!ModelState.IsValid)
+            {
+                _logger.LogError($"Invalid PUT attempt in {nameof(MyRecipeUpdate)}");
+                BadRequest(ModelState);
+            }
 
             try
             {
@@ -71,8 +82,8 @@ namespace recipe_planet.Controllers
             }
             catch (Exception ex)
             {
-
-                return BadRequest(ex.Message);
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(MyRecipeUpdate)}");
+                return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
 
@@ -88,7 +99,7 @@ namespace recipe_planet.Controllers
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(MyRecipeDeleteById)}");
                 return BadRequest(ex.Message);
             }
         }

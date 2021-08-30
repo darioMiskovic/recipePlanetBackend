@@ -1,0 +1,5 @@
+08/30/2021 21:02:21 +02:00 [Information] - Message: My Recipe with id: 2 does not exist
+08/30/2021 21:49:29 +02:00 [Error] - Message: Something Went Wrong in the MyRecipeInfo
+System.Exception: My Recipe with id: 8 does not exist
+   at recipe_planet.Services.MyRecipeService.MyRecipeInfo(Int32 id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\MyRecipeService.cs:line 39
+   at recipe_planet.Controllers.MyRecipeController.MyRecipeInfo(Int32 recipeId) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\MyRecipeController.cs:line 54
