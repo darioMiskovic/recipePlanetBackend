@@ -1,5 +1,264 @@
-08/30/2021 21:02:21 +02:00 [Information] - Message: My Recipe with id: 2 does not exist
-08/30/2021 21:49:29 +02:00 [Error] - Message: Something Went Wrong in the MyRecipeInfo
-System.Exception: My Recipe with id: 8 does not exist
+08/30/2021 23:44:52 +02:00 [Error] - Message: Something Went Wrong in the MyRecipeDeleteById
+System.Exception: My Recipe with id: 2121 does not exist
+   at recipe_planet.Services.MyRecipeService.DeleteMyRecipeById(Int32 id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\MyRecipeService.cs:line 71
+   at recipe_planet.Controllers.MyRecipeController.MyRecipeDeleteById(Int32 recipeId) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\MyRecipeController.cs:line 97
+08/30/2021 23:45:05 +02:00 [Error] - Message: Failed executing DbCommand ("12"ms) [Parameters=["@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (DbType = Boolean), @p4='?' (DbType = Int32), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [MyRecipes] ([UserId], [cooking_time], [image_url], [my_recipe], [num_servings], [publisher], [recipe_key], [source_url], [title])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+SELECT [Id]
+FROM [MyRecipes]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+08/30/2021 23:45:05 +02:00 [Error] - Message: An exception occurred in the database while saving changes for context type '"recipe_planet.Data.AppDbContext"'."
+""Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint \"FK_MyRecipes_AspNetUsers_UserId\". The conflict occurred in database \"recipePlanetDB\", table \"dbo.AspNetUsers\", column 'Id'.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__277_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:20e76097-a28e-4584-9cf2-789d09732947
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(DbContext _, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)"
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint "FK_MyRecipes_AspNetUsers_UserId". The conflict occurred in database "recipePlanetDB", table "dbo.AspNetUsers", column 'Id'.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__277_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:20e76097-a28e-4584-9cf2-789d09732947
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(DbContext _, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+08/30/2021 23:45:05 +02:00 [Error] - Message: Something Went Wrong in the AddMyRecipe
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint "FK_MyRecipes_AspNetUsers_UserId". The conflict occurred in database "recipePlanetDB", table "dbo.AspNetUsers", column 'Id'.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__277_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:20e76097-a28e-4584-9cf2-789d09732947
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(DbContext _, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at recipe_planet.Services.MyRecipeService.AddMyRecipe(CreateMyRecipeDTO myRecipe) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\MyRecipeService.cs:line 29
+   at recipe_planet.Controllers.MyRecipeController.AddMyRecipe(CreateMyRecipeDTO myRecipe) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\MyRecipeController.cs:line 38
+08/30/2021 23:45:38 +02:00 [Error] - Message: Failed executing DbCommand ("2"ms) [Parameters=["@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (DbType = Boolean), @p4='?' (DbType = Int32), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [MyRecipes] ([UserId], [cooking_time], [image_url], [my_recipe], [num_servings], [publisher], [recipe_key], [source_url], [title])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+SELECT [Id]
+FROM [MyRecipes]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+08/30/2021 23:45:38 +02:00 [Error] - Message: An exception occurred in the database while saving changes for context type '"recipe_planet.Data.AppDbContext"'."
+""Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint \"FK_MyRecipes_AspNetUsers_UserId\". The conflict occurred in database \"recipePlanetDB\", table \"dbo.AspNetUsers\", column 'Id'.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__277_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:4852f685-0255-47db-8413-95576310e207
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(DbContext _, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)"
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint "FK_MyRecipes_AspNetUsers_UserId". The conflict occurred in database "recipePlanetDB", table "dbo.AspNetUsers", column 'Id'.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__277_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:4852f685-0255-47db-8413-95576310e207
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(DbContext _, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+08/30/2021 23:45:38 +02:00 [Error] - Message: Something Went Wrong in the AddMyRecipe
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint "FK_MyRecipes_AspNetUsers_UserId". The conflict occurred in database "recipePlanetDB", table "dbo.AspNetUsers", column 'Id'.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__277_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:4852f685-0255-47db-8413-95576310e207
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(DbContext _, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at recipe_planet.Services.MyRecipeService.AddMyRecipe(CreateMyRecipeDTO myRecipe) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\MyRecipeService.cs:line 29
+   at recipe_planet.Controllers.MyRecipeController.AddMyRecipe(CreateMyRecipeDTO myRecipe) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\MyRecipeController.cs:line 38
+08/30/2021 23:48:08 +02:00 [Error] - Message: Something Went Wrong in the MyRecipeDeleteById
+System.Exception: My Recipe with id: 12 does not exist
+   at recipe_planet.Services.MyRecipeService.DeleteMyRecipeById(Int32 id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\MyRecipeService.cs:line 71
+   at recipe_planet.Controllers.MyRecipeController.MyRecipeDeleteById(Int32 recipeId) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\MyRecipeController.cs:line 97
+08/30/2021 23:48:14 +02:00 [Error] - Message: Something Went Wrong in the DeleteIngredientById
+System.Exception: Ingredient with id: 12 does not exist
+   at recipe_planet.Services.IngredientService.DeleteIngredientById(Int32 id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\IngredientService.cs:line 26
+   at recipe_planet.Controllers.IngredientController.DeleteIngredientById(Int32 ingredientId) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\IngredientController.cs:line 31
+08/30/2021 23:48:28 +02:00 [Error] - Message: Something Went Wrong in the DeleteFavoriteRecipe
+System.Exception: Recipe with id: 12 does not exist
+   at recipe_planet.Services.FavoriteService.DeleteFavoriteRecipe(Int32 id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\FavoriteService.cs:line 38
+   at recipe_planet.Controllers.FavoriteController.DeleteFavoriteRecipe(Int32 favoriteId) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\FavoriteController.cs:line 57
+08/30/2021 23:48:34 +02:00 [Error] - Message: Something Went Wrong in the DeleteUserById
+System.Exception: User with id: 123 does not exist
+   at recipe_planet.Services.AccountService.DeleteUserById(String id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\AccountService.cs:line 66
+   at recipe_planet.Controllers.AccountController.DeleteUserById(String userId) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\AccountController.cs:line 105
+2021-08-30 23:51:55.096 +02:00 [INF] User profile is available. Using 'C:\Users\Dario\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-08-30 23:51:55.408 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-08-30 23:51:55.408 +02:00 [INF] Hosting environment: Development
+2021-08-30 23:51:55.408 +02:00 [INF] Content root path: C:\Users\Dario\source\repos\recipe_planet\recipe_planet
+2021-08-30 23:51:55.471 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44317/swagger/index.html - -
+2021-08-30 23:51:55.616 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44317/swagger/index.html - - - 200 - text/html;charset=utf-8 165.8397ms
+2021-08-30 23:51:55.795 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44317/swagger/v1/swagger.json - -
+2021-08-30 23:51:55.905 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44317/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 110.0697ms
+2021-08-30 23:52:08.363 +02:00 [INF] Request starting HTTP/2 DELETE https://localhost:44317/api/Account/user-delete/121212 - -
+2021-08-30 23:52:08.407 +02:00 [INF] Executing endpoint 'recipe_planet.Controllers.AccountController.DeleteUserById (recipe_planet)'
+2021-08-30 23:52:08.455 +02:00 [INF] Route matched with {action = "DeleteUserById", controller = "Account"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DeleteUserById(System.String) on controller recipe_planet.Controllers.AccountController (recipe_planet).
+2021-08-30 23:52:09.779 +02:00 [INF] Entity Framework Core 5.0.9 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-08-30 23:52:10.544 +02:00 [INF] Executed DbCommand (59ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName], [a].[first_name], [a].[last_name]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2021-08-30 23:52:10.772 +02:00 [ERR] Something Went Wrong in the DeleteUserById
+System.Exception: User with id: 121212 does not exist
+   at recipe_planet.Services.AccountService.DeleteUserById(String id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\AccountService.cs:line 66
+   at recipe_planet.Controllers.AccountController.DeleteUserById(String userId) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\AccountController.cs:line 105
+2021-08-30 23:52:10.852 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2021-08-30 23:52:10.859 +02:00 [INF] Executed action recipe_planet.Controllers.AccountController.DeleteUserById (recipe_planet) in 2398.0209ms
+2021-08-30 23:52:10.860 +02:00 [INF] Executed endpoint 'recipe_planet.Controllers.AccountController.DeleteUserById (recipe_planet)'
+2021-08-30 23:52:10.866 +02:00 [INF] Request finished HTTP/2 DELETE https://localhost:44317/api/Account/user-delete/121212 - - - 400 - text/plain;+charset=utf-8 2502.8238ms
+2021-08-30 23:52:23.851 +02:00 [INF] Request starting HTTP/2 DELETE https://localhost:44317/api/MyRecipe/my-recipe-delete/21 - -
+2021-08-30 23:52:23.854 +02:00 [INF] Executing endpoint 'recipe_planet.Controllers.MyRecipeController.MyRecipeDeleteById (recipe_planet)'
+2021-08-30 23:52:23.860 +02:00 [INF] Route matched with {action = "MyRecipeDeleteById", controller = "MyRecipe"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] MyRecipeDeleteById(Int32) on controller recipe_planet.Controllers.MyRecipeController (recipe_planet).
+2021-08-30 23:52:23.895 +02:00 [INF] Entity Framework Core 5.0.9 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-08-30 23:52:23.924 +02:00 [INF] Executed DbCommand (8ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [m].[Id], [m].[UserId], [m].[cooking_time], [m].[image_url], [m].[my_recipe], [m].[num_servings], [m].[publisher], [m].[recipe_key], [m].[source_url], [m].[title]
+FROM [MyRecipes] AS [m]
+WHERE [m].[Id] = @__p_0
+2021-08-30 23:52:24.014 +02:00 [ERR] Something Went Wrong in the MyRecipeDeleteById
+System.Exception: My Recipe with id: 21 does not exist
+   at recipe_planet.Services.MyRecipeService.DeleteMyRecipeById(Int32 id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\MyRecipeService.cs:line 71
+   at recipe_planet.Controllers.MyRecipeController.MyRecipeDeleteById(Int32 recipeId) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\MyRecipeController.cs:line 97
+2021-08-30 23:52:24.015 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2021-08-30 23:52:24.016 +02:00 [INF] Executed action recipe_planet.Controllers.MyRecipeController.MyRecipeDeleteById (recipe_planet) in 155.7191ms
+2021-08-30 23:52:24.016 +02:00 [INF] Executed endpoint 'recipe_planet.Controllers.MyRecipeController.MyRecipeDeleteById (recipe_planet)'
+2021-08-30 23:52:24.016 +02:00 [INF] Request finished HTTP/2 DELETE https://localhost:44317/api/MyRecipe/my-recipe-delete/21 - - - 400 - text/plain;+charset=utf-8 165.0472ms
+2021-08-30 23:52:36.509 +02:00 [INF] Request starting HTTP/2 DELETE https://localhost:44317/api/Ingredient/delete-ingredient/12 - -
+2021-08-30 23:52:36.509 +02:00 [INF] Executing endpoint 'recipe_planet.Controllers.IngredientController.DeleteIngredientById (recipe_planet)'
+2021-08-30 23:52:36.547 +02:00 [INF] Route matched with {action = "DeleteIngredientById", controller = "Ingredient"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DeleteIngredientById(Int32) on controller recipe_planet.Controllers.IngredientController (recipe_planet).
+2021-08-30 23:52:36.558 +02:00 [INF] Entity Framework Core 5.0.9 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-08-30 23:52:36.582 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[MyRecipeId], [i].[description], [i].[quantity], [i].[unit]
+FROM [Ingredients] AS [i]
+WHERE [i].[Id] = @__p_0
+2021-08-30 23:52:36.671 +02:00 [ERR] Something Went Wrong in the DeleteIngredientById
+System.Exception: Ingredient with id: 12 does not exist
+   at recipe_planet.Services.IngredientService.DeleteIngredientById(Int32 id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\IngredientService.cs:line 26
+   at recipe_planet.Controllers.IngredientController.DeleteIngredientById(Int32 ingredientId) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\IngredientController.cs:line 31
+2021-08-30 23:52:36.671 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2021-08-30 23:52:36.672 +02:00 [INF] Executed action recipe_planet.Controllers.IngredientController.DeleteIngredientById (recipe_planet) in 124.9341ms
+2021-08-30 23:52:36.672 +02:00 [INF] Executed endpoint 'recipe_planet.Controllers.IngredientController.DeleteIngredientById (recipe_planet)'
+2021-08-30 23:52:36.672 +02:00 [INF] Request finished HTTP/2 DELETE https://localhost:44317/api/Ingredient/delete-ingredient/12 - - - 400 - text/plain;+charset=utf-8 163.1688ms
+2021-08-30 23:52:45.739 +02:00 [INF] Request starting HTTP/2 DELETE https://localhost:44317/api/Favorite/favorite-delete/21 - -
+2021-08-30 23:52:45.739 +02:00 [INF] Executing endpoint 'recipe_planet.Controllers.FavoriteController.DeleteFavoriteRecipe (recipe_planet)'
+2021-08-30 23:52:45.748 +02:00 [INF] Route matched with {action = "DeleteFavoriteRecipe", controller = "Favorite"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DeleteFavoriteRecipe(Int32) on controller recipe_planet.Controllers.FavoriteController (recipe_planet).
+2021-08-30 23:52:45.751 +02:00 [INF] Entity Framework Core 5.0.9 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-08-30 23:52:45.776 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [f].[Id], [f].[UserId], [f].[image_url], [f].[publisher], [f].[recipe_key], [f].[title]
+FROM [Favorites] AS [f]
+WHERE [f].[Id] = @__p_0
+2021-08-30 23:52:45.855 +02:00 [ERR] Something Went Wrong in the DeleteFavoriteRecipe
+System.Exception: Recipe with id: 21 does not exist
+   at recipe_planet.Services.FavoriteService.DeleteFavoriteRecipe(Int32 id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\FavoriteService.cs:line 38
+   at recipe_planet.Controllers.FavoriteController.DeleteFavoriteRecipe(Int32 favoriteId) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\FavoriteController.cs:line 57
+2021-08-30 23:52:45.855 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2021-08-30 23:52:45.855 +02:00 [INF] Executed action recipe_planet.Controllers.FavoriteController.DeleteFavoriteRecipe (recipe_planet) in 107.3049ms
+2021-08-30 23:52:45.855 +02:00 [INF] Executed endpoint 'recipe_planet.Controllers.FavoriteController.DeleteFavoriteRecipe (recipe_planet)'
+2021-08-30 23:52:45.856 +02:00 [INF] Request finished HTTP/2 DELETE https://localhost:44317/api/Favorite/favorite-delete/21 - - - 400 - text/plain;+charset=utf-8 117.1798ms
+08/30/2021 23:56:24 +02:00 [Error] - Message: Something Went Wrong in the MyRecipeInfo
+System.Exception: My Recipe with id: 22 does not exist
    at recipe_planet.Services.MyRecipeService.MyRecipeInfo(Int32 id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\MyRecipeService.cs:line 39
-   at recipe_planet.Controllers.MyRecipeController.MyRecipeInfo(Int32 recipeId) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\MyRecipeController.cs:line 54
+   at recipe_planet.Controllers.MyRecipeController.MyRecipeInfo(Int32 recipeId) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\MyRecipeController.cs:line 57

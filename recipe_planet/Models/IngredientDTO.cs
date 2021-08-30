@@ -10,7 +10,7 @@ namespace recipe_planet.Models
     public class CreateIngredientDTO
     {
         [Required]
-        public int quantity { get; set; }
+        public string quantity { get; set; }
         [Required]
         public string unit { get; set; }
         [Required]

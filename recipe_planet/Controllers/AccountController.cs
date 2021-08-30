@@ -36,7 +36,7 @@ namespace recipe_planet.Controllers
             if (!ModelState.IsValid)
             {
                 _logger.LogError($"Invalid POST attempt in {nameof(Register)}");
-                BadRequest(ModelState);
+                return BadRequest(ModelState);
             }
 
             try

@@ -9,7 +9,7 @@ namespace recipe_planet.Data
     {
         public int Id { get; set; }
 
-        public int quantity { get; set; }
+        public string quantity { get; set; }
 
         public string unit { get; set; }
 

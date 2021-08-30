@@ -23,7 +23,7 @@ namespace recipe_planet
                 Log.Logger = new LoggerConfiguration()
                     .ReadFrom.Configuration(configuration)
                     .CreateLogger();
-                
+
 
                 //Log.Logger = new LoggerConfiguration()
                 //    .WriteTo.File("Logs/log.txt", rollingInterval: RollingInterval.Day)

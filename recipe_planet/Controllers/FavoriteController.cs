@@ -32,7 +32,7 @@ namespace recipe_planet.Controllers
             if (!ModelState.IsValid)
             {
                 _logger.LogError($"Invalid POST attempt in {nameof(AddFavoriteRecipe)}");
-                BadRequest(ModelState);
+                return BadRequest(ModelState);
             }
 
             try

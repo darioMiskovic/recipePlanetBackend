@@ -30,7 +30,7 @@ namespace recipe_planet.Controllers
         {
             if (!ModelState.IsValid) {
                 _logger.LogError($"Invalid POST attempt in {nameof(AddMyRecipe)}");
-                BadRequest(ModelState);
+                return BadRequest(ModelState);
             }
 
             try
@@ -71,7 +71,7 @@ namespace recipe_planet.Controllers
             if (!ModelState.IsValid)
             {
                 _logger.LogError($"Invalid PUT attempt in {nameof(MyRecipeUpdate)}");
-                BadRequest(ModelState);
+                return BadRequest(ModelState);
             }
 
             try
