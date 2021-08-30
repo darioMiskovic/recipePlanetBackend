@@ -19,4 +19,6 @@ namespace recipe_planet.Data
         public int MyRecipeId { get; set; }
         public MyRecipe MyRecipe { get; set; }
     }
+
+    
 }
