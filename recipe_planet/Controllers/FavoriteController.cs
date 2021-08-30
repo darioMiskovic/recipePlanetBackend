@@ -42,16 +42,6 @@ namespace recipe_planet.Controllers
         }
 
 
-        //Get My Favorites List
-        [HttpGet("favorites/{userId}")]
-
-        public async Task<IActionResult> GetFavorites(string userId)
-        {
-            var recipes = await _favoriteService.GetFavorites(userId);
-            return Ok(recipes);
-        }
-
-
        //Delete 
         [HttpDelete("favorite-delete/{favoriteId}")]
         public async Task<IActionResult> DeleteFavoriteRecipe(int favoriteId)

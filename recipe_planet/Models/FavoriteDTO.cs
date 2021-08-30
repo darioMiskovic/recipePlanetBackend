@@ -24,6 +24,6 @@ namespace recipe_planet.Models
     {
         public int Id { get; set; }
 
-        public UserDTO User { get; set; }
+        //public UserDTO User { get; set; }
     }
 }

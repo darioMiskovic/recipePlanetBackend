@@ -22,25 +22,15 @@ namespace recipe_planet.Services
         }
 
         //Add My Recipe 
-        public async Task<MyRecipe> AddMyRecipe(CreateMyRecipeDTO myRecipe)
+        public async Task<MyRecipeDTO> AddMyRecipe(CreateMyRecipeDTO myRecipe)
         {
             var _myRecipe = _mapper.Map<MyRecipe>(myRecipe);
             await _context.MyRecipes.AddAsync(_myRecipe);
             await _context.SaveChangesAsync();
-            return _myRecipe;
+            return _mapper.Map<MyRecipeDTO>(_myRecipe);
         }
 
-        //Get My Recipes List
-        public async Task<List<MyRecipeDTO>> GetMyRecipesById(string id)
-        {
-            var myRecipes = await _context.MyRecipes.Where(n => n.UserId == id).ToListAsync();
-
-            if(myRecipes == null) throw new Exception($"You dont have Recipes!"); //******** dodati user service za provjeru
-
-            return _mapper.Map<List<MyRecipeDTO>>(myRecipes);
-        }
-
-
+       
         //GET My Recipe Info
         public async Task<MyRecipeDTO> MyRecipeInfo(int id)
         {
@@ -54,7 +44,7 @@ namespace recipe_planet.Services
 
 
         //Update My Recipe 
-        public async Task<MyRecipe> MyRecipeUpdate(int recipeId ,CreateMyRecipeDTO myRecipe)
+        public async Task<MyRecipeDTO> MyRecipeUpdate(int recipeId ,CreateMyRecipeDTO myRecipe)
         {
            
             var _fetchMyRecipe = await _context.MyRecipes.FindAsync(recipeId);
@@ -68,7 +58,7 @@ namespace recipe_planet.Services
              _context.MyRecipes.Update(_fetchMyRecipe);
             await _context.SaveChangesAsync();
 
-            return _fetchMyRecipe;
+            return _mapper.Map<MyRecipeDTO>(_fetchMyRecipe);
 
         }
 

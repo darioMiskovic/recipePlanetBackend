@@ -20,21 +20,14 @@ namespace recipe_planet.Services
         }
 
         //Add Favorite Recipe
-        public async Task<Favorite> AddFavoriteRecipe(CreateFavoriteDTO favorite)
+        public async Task<FavoriteDTO> AddFavoriteRecipe(CreateFavoriteDTO favorite)
         {
             var _favorite = _mapper.Map<Favorite>(favorite);
             await _context.Favorites.AddAsync(_favorite);
             await _context.SaveChangesAsync();
-            return _favorite;
+            return _mapper.Map<FavoriteDTO>(_favorite);
         }
 
-
-        //Get Favorites List
-        public async Task<List<FavoriteDTO>> GetFavorites(string id)
-        {
-            var favorites = await _context.Favorites.Where(n => n.UserId == id).ToListAsync(); //******************
-            return _mapper.Map<List<FavoriteDTO>>(favorites);
-        }
 
         //Delete Favorite Recipe
         public async Task<bool> DeleteFavoriteRecipe(int id)

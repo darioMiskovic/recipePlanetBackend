@@ -24,6 +24,6 @@ namespace recipe_planet.Models
     {
         public int Id { get; set; }
 
-        public MyRecipeDTO MyRecipe { get; set; }
+        //public MyRecipeDTO MyRecipe { get; set; }
     }
 }

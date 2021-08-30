@@ -39,21 +39,7 @@ namespace recipe_planet.Controllers
             }
         }
 
-        //Get My Recipes List
-        [HttpGet("my-recipes/{userId}")]
-        public async Task<IActionResult> GetMyRecipesById(string userId)
-        {
-            try
-            {
-                var recipes = await _myRecipeService.GetMyRecipesById(userId);
-                return Ok(recipes);
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-        }
+       
 
         //Get My Recipe Info
         [HttpGet("my-recipe-info/{recipeId}")]
@@ -80,6 +66,7 @@ namespace recipe_planet.Controllers
             try
             {
                 var recipes = await _myRecipeService.MyRecipeUpdate(recipeId, myRecipe);
+                
                 return Ok(recipes);
             }
             catch (Exception ex)
