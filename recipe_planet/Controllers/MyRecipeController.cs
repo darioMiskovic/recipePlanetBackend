@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using recipe_planet.Models;
 using recipe_planet.Services;
 using System;
@@ -15,10 +16,12 @@ namespace recipe_planet.Controllers
     {
 
         private  MyRecipeService _myRecipeService;
+        private readonly ILogger<MyRecipeController> _logger;
 
-        public MyRecipeController(MyRecipeService myRecipeService)
+        public MyRecipeController(MyRecipeService myRecipeService, ILogger<MyRecipeController> logger)
         {
             _myRecipeService = myRecipeService;
+            _logger = logger;
         }
 
         //Add My Rcipe
@@ -33,8 +36,9 @@ namespace recipe_planet.Controllers
 
                 return CreatedAtRoute("AddMyRecipe", new { id = _myRecipe.Id}, _myRecipe);
             }
-            catch (Exception )
+            catch (Exception ex)
             {
+                _logger.LogInformation(ex.Message);
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
@@ -52,7 +56,7 @@ namespace recipe_planet.Controllers
             }
             catch (Exception ex)
             {
-
+                _logger.LogInformation(ex.Message);
                 return BadRequest(ex.Message);
             }
         }
