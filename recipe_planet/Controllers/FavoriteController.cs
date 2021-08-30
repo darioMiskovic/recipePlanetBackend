@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using recipe_planet.Models;
 using recipe_planet.Services;
 using System;
@@ -14,35 +15,40 @@ namespace recipe_planet.Controllers
     public class FavoriteController : ControllerBase
     {
         private FavoriteService _favoriteService;
+        private readonly ILogger<FavoriteController> _logger;
 
-        public FavoriteController(FavoriteService favoriteService)
+        public FavoriteController(FavoriteService favoriteService, ILogger<FavoriteController> logger)
         {
             _favoriteService = favoriteService;
+            _logger = logger;
         }
 
        
 
-        //Add My Rcipe
+        //Add My Favorite Recipe
         [HttpPost("add-favorite-recipe", Name = "AddFavoriteRecipe")]
         public async Task<IActionResult> AddFavoriteRecipe([FromBody] CreateFavoriteDTO favorite)
         {
-            if (!ModelState.IsValid) BadRequest(ModelState);
+            if (!ModelState.IsValid)
+            {
+                _logger.LogError($"Invalid POST attempt in {nameof(AddFavoriteRecipe)}");
+                BadRequest(ModelState);
+            }
 
             try
             {
-                var _favorite = await _favoriteService.AddFavoriteRecipe(favorite);
-
-                
+                var _favorite = await _favoriteService.AddFavoriteRecipe(favorite);  
                 return Created(nameof(AddFavoriteRecipe), _favorite);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(AddFavoriteRecipe)}");
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
 
 
-       //Delete 
+        //Delete Favorite Recipe By Id 
         [HttpDelete("favorite-delete/{favoriteId}")]
         public async Task<IActionResult> DeleteFavoriteRecipe(int favoriteId)
         {
@@ -53,7 +59,7 @@ namespace recipe_planet.Controllers
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(DeleteFavoriteRecipe)}");
                 return BadRequest(ex.Message);
             }
         }

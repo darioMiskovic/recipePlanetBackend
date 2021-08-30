@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using recipe_planet.Services;
 using System;
 using System.Collections.Generic;
@@ -13,14 +14,17 @@ namespace recipe_planet.Controllers
     public class IngredientController : ControllerBase
     {
         private IngredientService _ingredientService;
+        private readonly ILogger<IngredientController> _logger;
 
-        public IngredientController(IngredientService ingredientService)
+        public IngredientController(IngredientService ingredientService, ILogger<IngredientController> logger)
         {
             _ingredientService = ingredientService;
+            _logger = logger;
         }
 
+        //Delete Ingredient By Id
         [HttpDelete("delete-ingredient/{ingredientId}")]
-        public async Task<IActionResult> MyRecipeDeleteById(int ingredientId)
+        public async Task<IActionResult> DeleteIngredientById(int ingredientId)
         {
             try
             {
@@ -29,7 +33,7 @@ namespace recipe_planet.Controllers
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(DeleteIngredientById)}");
                 return BadRequest(ex.Message);
             }
         }

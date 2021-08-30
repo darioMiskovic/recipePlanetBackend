@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using recipe_planet.Data;
 using recipe_planet.Models;
 using recipe_planet.Services;
@@ -18,10 +19,12 @@ namespace recipe_planet.Controllers
     {
 
         private AccountService _accountService;
+        private readonly ILogger<AccountController> _logger;
 
-        public AccountController(AccountService accountService)
+        public AccountController(AccountService accountService, ILogger<AccountController> logger)
         {
             _accountService = accountService;
+            _logger = logger;
         }
 
 
@@ -30,8 +33,12 @@ namespace recipe_planet.Controllers
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] UserDTO userDTO)
         {
-            if (!ModelState.IsValid) BadRequest(ModelState);
-            
+            if (!ModelState.IsValid)
+            {
+                _logger.LogError($"Invalid POST attempt in {nameof(Register)}");
+                BadRequest(ModelState);
+            }
+
             try
             {
                var result = await _accountService.RegisterAccount(userDTO);
@@ -42,12 +49,14 @@ namespace recipe_planet.Controllers
                     {
                         ModelState.AddModelError(error.Code, error.Description);
                     }
+                    _logger.LogError($"Invalid POST attempt in {nameof(Register)}");
                     return BadRequest(ModelState);
                 }
                 return Accepted(result.Succeeded);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(Register)}");
                 return Problem($"Something Went Wrong in the {nameof(Register)}", statusCode: 500);
             }
         }
@@ -64,7 +73,7 @@ namespace recipe_planet.Controllers
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetMyRecipes)}");
                 return BadRequest(ex.Message);
             }
         }
@@ -81,13 +90,13 @@ namespace recipe_planet.Controllers
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetMyFavorites)}");
                 return BadRequest(ex.Message);
             }
         }
 
 
-        //Delete My Recipe 
+        //Delete User
         [HttpDelete("user-delete/{userId}")]
         public async Task<IActionResult> DeleteUserById(string userId)
         {
@@ -100,14 +109,16 @@ namespace recipe_planet.Controllers
                     {
                         ModelState.AddModelError(error.Code, error.Description);
                     }
+
+                    _logger.LogError($"Invalid DELETE attempt in {nameof(DeleteUserById)}");
                     return BadRequest(ModelState);
                 }
                 return Accepted(result.Succeeded);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
-                //return Problem($"Something Went Wrong in the {nameof(Register)}", statusCode: 500);
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(DeleteUserById)}");
+                return BadRequest(ex.Message);
             }
         }
     }
