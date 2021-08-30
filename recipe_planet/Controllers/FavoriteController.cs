@@ -56,8 +56,16 @@ namespace recipe_planet.Controllers
         [HttpDelete("favorite-delete/{favoriteId}")]
         public async Task<IActionResult> DeleteFavoriteRecipe(int favoriteId)
         {
-            var isDeleted = await _favoriteService.DeleteFavoriteRecipe(favoriteId);
-            return Ok(isDeleted);
+            try
+            {
+                var isDeleted = await _favoriteService.DeleteFavoriteRecipe(favoriteId);
+                return Ok(isDeleted);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

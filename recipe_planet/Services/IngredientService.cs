@@ -23,7 +23,7 @@ namespace recipe_planet.Services
             var ingredient = await _context.Ingredients.FindAsync(id);
             if (ingredient == null)
             {
-                throw new Exception("Submited data is invalid");
+                throw new Exception($"Ingredient with id: {id} does not exist");
             }
 
             _context.Ingredients.Remove(ingredient);

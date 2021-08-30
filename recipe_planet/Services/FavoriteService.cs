@@ -32,7 +32,7 @@ namespace recipe_planet.Services
         //Get Favorites List
         public async Task<List<FavoriteDTO>> GetFavorites(string id)
         {
-            var favorites = await _context.Favorites.Where(n => n.UserId == id).ToListAsync();
+            var favorites = await _context.Favorites.Where(n => n.UserId == id).ToListAsync(); //******************
             return _mapper.Map<List<FavoriteDTO>>(favorites);
         }
 
@@ -42,7 +42,7 @@ namespace recipe_planet.Services
             var favorite = await _context.Favorites.FindAsync(id);
             if (favorite == null)
             {
-                throw new Exception("Submited data is invalid");
+                throw new Exception($"Recipe with id: {id} does not exist");
             }
 
             _context.Favorites.Remove(favorite);

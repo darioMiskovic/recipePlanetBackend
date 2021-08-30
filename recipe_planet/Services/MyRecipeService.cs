@@ -35,7 +35,7 @@ namespace recipe_planet.Services
         {
             var myRecipes = await _context.MyRecipes.Where(n => n.UserId == id).ToListAsync();
 
-            //if(!myRecipes) new BadRe
+            if(myRecipes == null) throw new Exception($"You dont have Recipes!"); //******** dodati user service za provjeru
 
             return _mapper.Map<List<MyRecipeDTO>>(myRecipes);
         }
@@ -61,7 +61,7 @@ namespace recipe_planet.Services
 
             if (_fetchMyRecipe == null)
             {
-                throw new Exception("Submited data is invalid");
+                throw new Exception($"My Recipe with id: {recipeId} does not exist");
             }
 
             _mapper.Map(myRecipe, _fetchMyRecipe);
@@ -78,7 +78,7 @@ namespace recipe_planet.Services
             var myRecipe = await _context.MyRecipes.FindAsync(id);
             if (myRecipe == null)
             {
-                throw new Exception("Submited data is invalid");
+                throw new Exception($"My Recipe with id: {id} does not exist");
             }
 
              _context.MyRecipes.Remove(myRecipe);

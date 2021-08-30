@@ -22,8 +22,16 @@ namespace recipe_planet.Controllers
         [HttpDelete("delete-ingredient/{ingredientId}")]
         public async Task<IActionResult> MyRecipeDeleteById(int ingredientId)
         {
-            var isDeleted = await _ingredientService.DeleteIngredientById(ingredientId);
-            return Ok(isDeleted);
+            try
+            {
+                var isDeleted = await _ingredientService.DeleteIngredientById(ingredientId);
+                return Ok(isDeleted);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
