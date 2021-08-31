@@ -47,7 +47,7 @@ namespace recipe_planet
 
 
             services.AddCors(o => {
-                o.AddPolicy("AllowAll", builder =>
+                o.AddPolicy("EnableCORS", builder =>
                     builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader());
@@ -84,7 +84,7 @@ namespace recipe_planet
 
             app.UseHttpsRedirection();
 
-            app.UseCors("AllowAll");
+            app.UseCors("EnableCORS");
 
             app.UseRouting();
 
