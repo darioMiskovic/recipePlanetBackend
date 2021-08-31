@@ -80,3 +80,4 @@ C:\Users\Dario\source\repos\recipe_planet\recipe_planet\bin\Debug\net5.0\Microso
 C:\Users\Dario\source\repos\recipe_planet\recipe_planet\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\Dario\source\repos\recipe_planet\recipe_planet\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
 C:\Users\Dario\source\repos\recipe_planet\recipe_planet\obj\Debug\net5.0\recipe_planet.csproj.AssemblyReference.cache
+C:\Users\Dario\source\repos\recipe_planet\recipe_planet\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

@@ -42,6 +42,7 @@ namespace recipe_planet
             //Configure the Services
             services.AddAuthentication();
             services.ConfigureIdentity();
+            services.ConfigureJWT(Configuration); 
 
             services.AddTransient<AccountService>();
             services.AddTransient<MyRecipeService>();
