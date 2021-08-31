@@ -17,15 +17,13 @@ namespace recipe_planet.Services
 
 
         private readonly UserManager<User> _userManager;
-       // private readonly SignInManager<User> _signInManager;
-
         private AppDbContext _context;
         private readonly IMapper _mapper;
+        
 
         public AccountService(UserManager<User> userManager, IMapper mapper, AppDbContext context)
         {
             _userManager = userManager;
-            //_signInManager = signInManager;
             _mapper = mapper;
             _context = context;
         }
@@ -39,20 +37,13 @@ namespace recipe_planet.Services
 
             if (result.Succeeded)
             {
-                await _userManager.AddToRolesAsync(user, userDTO.Roles);
+                await _userManager.AddToRoleAsync(user, "User");
             }
 
             return result;
 
         }
 
-        //Login
-        /*public async Task<Microsoft.AspNetCore.Identity.SignInResult> LoginAccount(LoginUserDTO userDTO)
-        {
-
-            return await _signInManager.PasswordSignInAsync(userDTO.Email, userDTO.Password, false, false);
-
-        }*/
 
         //Get My Recipes List
         public async Task<List<MyRecipeDTO>> GetMyRecipesById(string id)
