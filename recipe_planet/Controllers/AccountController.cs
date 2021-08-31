@@ -29,13 +29,12 @@ namespace recipe_planet.Controllers
 
 
         //Register
-        [HttpPost]
-        [Route("register")]
+        [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserDTO userDTO)
         {
             if (!ModelState.IsValid)
             {
-                _logger.LogError($"Invalid POST attempt in {nameof(Register)}");
+                _logger.LogError($"Invalid Register attempt in {nameof(Register)}");
                 return BadRequest(ModelState);
             }
 
@@ -52,6 +51,7 @@ namespace recipe_planet.Controllers
                     _logger.LogError($"Invalid POST attempt in {nameof(Register)}");
                     return BadRequest(ModelState);
                 }
+
                 return Accepted(result.Succeeded);
             }
             catch (Exception ex)
@@ -61,6 +61,33 @@ namespace recipe_planet.Controllers
             }
         }
 
+
+        /*[HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginUserDTO userDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                _logger.LogError($"Invalid Login attempt in {nameof(Login)}");
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var result = await _accountService.LoginAccount(userDTO);
+
+                if (!result.Succeeded)
+                {
+                    _logger.LogError($"Unauthorized user attemtp to login {nameof(Register)}");
+                    return Unauthorized(userDTO);
+                }
+                return Accepted(result.Succeeded);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(Register)}");
+                return Problem($"Something Went Wrong in the {nameof(Register)}", statusCode: 500);
+            }
+        }*/
 
         //Get My Recipes List
         [HttpGet("my-recipes/{id}")]
