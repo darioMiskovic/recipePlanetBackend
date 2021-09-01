@@ -42,7 +42,6 @@ namespace recipe_planet.Services
             var expirationTime = DateTime.Now.AddMinutes(Convert.ToDouble(_jwtSettings.GetSection("lifetime").Value));
             var token = new JwtSecurityToken(
                     issuer: _jwtSettings.GetSection("Issuer").Value,
-                    //audience: _jwtSettings.GetSection("Audience").Value,
                     claims: claims,
                     expires: expirationTime,
                     signingCredentials: signingCredentials
