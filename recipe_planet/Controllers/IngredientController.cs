@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using recipe_planet.Services;
@@ -23,6 +24,7 @@ namespace recipe_planet.Controllers
         }
 
         //Delete Ingredient By Id
+        [Authorize]
         [HttpDelete("delete-ingredient/{ingredientId}")]
         public async Task<IActionResult> DeleteIngredientById(int ingredientId)
         {

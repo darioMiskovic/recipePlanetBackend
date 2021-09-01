@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using recipe_planet.Configuration;
 using recipe_planet.Data;
+using recipe_planet.Models;
 using recipe_planet.Services;
 using System;
 using System.Collections.Generic;
@@ -42,11 +43,21 @@ namespace recipe_planet
             //Configure the Services
             services.AddAuthentication();
             services.ConfigureIdentity();
+            services.ConfigureJWT(Configuration);
+
+
+            services.AddCors(o => {
+                o.AddPolicy("EnableCORS", builder =>
+                    builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
 
             services.AddTransient<AccountService>();
             services.AddTransient<MyRecipeService>();
             services.AddTransient<IngredientService>();
             services.AddTransient<FavoriteService>();
+            services.AddScoped<IAuthManager, AuthManagerService>();
 
             services.AddAutoMapper(typeof(MapperInitializer));
 
@@ -73,8 +84,11 @@ namespace recipe_planet
 
             app.UseHttpsRedirection();
 
+            app.UseCors("EnableCORS");
+
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

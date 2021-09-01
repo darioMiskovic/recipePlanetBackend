@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -20,22 +21,23 @@ namespace recipe_planet.Controllers
 
         private AccountService _accountService;
         private readonly ILogger<AccountController> _logger;
+        private readonly IAuthManager _authManager;
 
-        public AccountController(AccountService accountService, ILogger<AccountController> logger)
+        public AccountController(AccountService accountService, ILogger<AccountController> logger, IAuthManager authManager)
         {
             _accountService = accountService;
             _logger = logger;
+            _authManager = authManager;
         }
 
 
         //Register
-        [HttpPost]
-        [Route("register")]
+        [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserDTO userDTO)
         {
             if (!ModelState.IsValid)
             {
-                _logger.LogError($"Invalid POST attempt in {nameof(Register)}");
+                _logger.LogError($"Invalid Register attempt in {nameof(Register)}");
                 return BadRequest(ModelState);
             }
 
@@ -52,6 +54,7 @@ namespace recipe_planet.Controllers
                     _logger.LogError($"Invalid POST attempt in {nameof(Register)}");
                     return BadRequest(ModelState);
                 }
+
                 return Accepted(result.Succeeded);
             }
             catch (Exception ex)
@@ -62,7 +65,36 @@ namespace recipe_planet.Controllers
         }
 
 
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginUserDTO userDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                _logger.LogError($"Invalid Login attempt in {nameof(Login)}");
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+               
+                var isUserValid = await _authManager.ValidateUser(userDTO);
+
+                if (!isUserValid)
+                {
+                    _logger.LogError($"Unauthorized user attemtp to login {nameof(Login)}");
+                    return Unauthorized(userDTO);
+                }
+                return Accepted( new { Token = await _authManager.CreateToken()} );
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(Login)}");
+                return Problem($"Something Went Wrong in the {nameof(Login)}", statusCode: 500);
+            }
+        }
+
         //Get My Recipes List
+        [Authorize]
         [HttpGet("my-recipes/{id}")]
         public async Task<IActionResult> GetMyRecipes(string id)
         {
@@ -80,6 +112,7 @@ namespace recipe_planet.Controllers
 
 
         //Get My Favorites List
+        [Authorize]
         [HttpGet("my-favorites/{id}")]
         public async Task<IActionResult> GetMyFavorites(string id)
         {
@@ -97,6 +130,7 @@ namespace recipe_planet.Controllers
 
 
         //Delete User
+        [Authorize]
         [HttpDelete("user-delete/{userId}")]
         public async Task<IActionResult> DeleteUserById(string userId)
         {

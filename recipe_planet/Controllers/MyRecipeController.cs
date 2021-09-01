@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using recipe_planet.Models;
@@ -25,6 +26,7 @@ namespace recipe_planet.Controllers
         }
 
         //Add My Recipe
+        [Authorize]
         [HttpPost("add-my-recipe" , Name ="AddMyRecipe")]
         public async Task<IActionResult> AddMyRecipe([FromBody] CreateMyRecipeDTO myRecipe)
         {
@@ -46,9 +48,10 @@ namespace recipe_planet.Controllers
             }
         }
 
-       
+
 
         //Get My Recipe Info
+        [Authorize]
         [HttpGet("my-recipe-info/{recipeId}")]
         public async Task<IActionResult> MyRecipeInfo(int recipeId)
         {
@@ -65,6 +68,7 @@ namespace recipe_planet.Controllers
         }
 
         //Update My Recipe
+        [Authorize]
         [HttpPut("my-recipe-update/{recipeId}")]
         public async Task<IActionResult> MyRecipeUpdate(int recipeId, [FromBody] CreateMyRecipeDTO myRecipe)
         {
@@ -89,6 +93,7 @@ namespace recipe_planet.Controllers
 
 
         //Delete My Recipe 
+        [Authorize]
         [HttpDelete("my-recipe-delete/{recipeId}")]
         public async Task<IActionResult> MyRecipeDeleteById(int recipeId)
         {

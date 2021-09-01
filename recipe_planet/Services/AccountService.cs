@@ -19,6 +19,7 @@ namespace recipe_planet.Services
         private readonly UserManager<User> _userManager;
         private AppDbContext _context;
         private readonly IMapper _mapper;
+        
 
         public AccountService(UserManager<User> userManager, IMapper mapper, AppDbContext context)
         {
@@ -32,9 +33,17 @@ namespace recipe_planet.Services
         {
             var user = _mapper.Map<User>(userDTO);
             user.UserName = userDTO.Email;
-            return await _userManager.CreateAsync(user, userDTO.Password);
+            var result = await _userManager.CreateAsync(user, userDTO.Password);
+
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, "User");
+            }
+
+            return result;
 
         }
+
 
         //Get My Recipes List
         public async Task<List<MyRecipeDTO>> GetMyRecipesById(string id)

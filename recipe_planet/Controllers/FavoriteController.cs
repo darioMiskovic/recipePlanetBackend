@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using recipe_planet.Models;
@@ -23,9 +24,10 @@ namespace recipe_planet.Controllers
             _logger = logger;
         }
 
-       
+
 
         //Add My Favorite Recipe
+        [Authorize]
         [HttpPost("add-favorite-recipe", Name = "AddFavoriteRecipe")]
         public async Task<IActionResult> AddFavoriteRecipe([FromBody] CreateFavoriteDTO favorite)
         {
@@ -49,6 +51,7 @@ namespace recipe_planet.Controllers
 
 
         //Delete Favorite Recipe By Id 
+        [Authorize]
         [HttpDelete("favorite-delete/{favoriteId}")]
         public async Task<IActionResult> DeleteFavoriteRecipe(int favoriteId)
         {
