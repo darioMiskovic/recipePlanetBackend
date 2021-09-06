@@ -110,6 +110,23 @@ namespace recipe_planet.Controllers
             }
         }
 
+        //User Info
+        [Authorize]
+        [HttpGet("user/{id}")]
+        public async Task<IActionResult> GetUserInfo(string id)
+        {
+            try
+            {
+                var userInfo = await _accountService.GetUserInfo(id);
+                return Ok(userInfo);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetUserInfo)}");
+                return BadRequest(ex.Message);
+            }
+        }
+
 
         //Get My Favorites List
         [Authorize]

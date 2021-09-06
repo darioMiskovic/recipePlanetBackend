@@ -26,13 +26,13 @@ namespace recipe_planet.Models
         [Required]
         public string last_name { get; set; }
 
-        public ICollection<string> Roles { get; set; }
+        public IList<string> Roles { get; set; }
 
         //Navigation Properties
 
-        //public List<MyRecipeDTO> MyRecipes { get; set; }
+        public List<MyRecipeDTO> MyRecipes { get; set; }
 
-        //public List<FavoriteDTO> Favorites { get; set; }
+        public List<FavoriteDTO> Favorites { get; set; }
 
     }
 }

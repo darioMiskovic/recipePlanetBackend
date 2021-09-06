@@ -45,6 +45,27 @@ namespace recipe_planet.Services
         }
 
 
+        //User Info
+        public async Task<UserDTO> GetUserInfo(string id)
+        {
+            var user = await _context.Users
+                .Include(n => n.MyRecipes)
+                .Include(n => n.Favorites)
+                .Where(n => n.Id == id).FirstOrDefaultAsync();
+
+            if (user == null) throw new Exception($"User with id: {id} does'nt exist!");
+
+            var userDTO = _mapper.Map<UserDTO>(user);
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            userDTO.Roles = roles;
+
+            return userDTO;
+
+        }
+
+
         //Get My Recipes List
         public async Task<List<MyRecipeDTO>> GetMyRecipesById(string id)
         {
