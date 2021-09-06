@@ -30,9 +30,9 @@ namespace recipe_planet.Models
 
         //Navigation Properties
 
-        public List<MyRecipeDTO> MyRecipes { get; set; }
+        //public List<MyRecipeDTO> MyRecipes { get; set; }
 
-        public List<FavoriteDTO> Favorites { get; set; }
+        //public List<FavoriteDTO> Favorites { get; set; }
 
     }
 }

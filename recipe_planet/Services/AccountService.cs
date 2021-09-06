@@ -49,11 +49,11 @@ namespace recipe_planet.Services
         public async Task<UserDTO> GetUserInfo(string id)
         {
             var user = await _context.Users
-                .Include(n => n.MyRecipes)
-                .Include(n => n.Favorites)
+                //.Include(n => n.MyRecipes)
+                //.Include(n => n.Favorites)
                 .Where(n => n.Id == id).FirstOrDefaultAsync();
 
-            if (user == null) throw new Exception($"User with id: {id} does'nt exist!");
+            if (user == null) throw new Exception($"User with id: {id} doesn't exist!");
 
             var userDTO = _mapper.Map<UserDTO>(user);
 

@@ -1,0 +1,28 @@
+09/07/2021 00:37:45 +02:00 [Error] - Message: Something Went Wrong in the GetMyRecipes
+System.Exception: User with id: undefined does'nt exist!
+   at recipe_planet.Services.AccountService.GetMyRecipesById(String id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\AccountService.cs:line 74
+   at recipe_planet.Controllers.AccountController.GetMyRecipes(String id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\AccountController.cs:line 103
+09/07/2021 00:38:20 +02:00 [Error] - Message: Something Went Wrong in the GetMyRecipes
+System.Exception: User with id: undefined does'nt exist!
+   at recipe_planet.Services.AccountService.GetMyRecipesById(String id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\AccountService.cs:line 74
+   at recipe_planet.Controllers.AccountController.GetMyRecipes(String id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\AccountController.cs:line 103
+09/07/2021 00:39:25 +02:00 [Error] - Message: Something Went Wrong in the GetMyRecipes
+System.Exception: User with id: undefined does'nt exist!
+   at recipe_planet.Services.AccountService.GetMyRecipesById(String id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\AccountService.cs:line 74
+   at recipe_planet.Controllers.AccountController.GetMyRecipes(String id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\AccountController.cs:line 103
+09/07/2021 00:42:14 +02:00 [Error] - Message: Something Went Wrong in the GetMyRecipes
+System.Exception: User with id: undefined does'nt exist!
+   at recipe_planet.Services.AccountService.GetMyRecipesById(String id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\AccountService.cs:line 74
+   at recipe_planet.Controllers.AccountController.GetMyRecipes(String id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\AccountController.cs:line 103
+09/07/2021 00:42:23 +02:00 [Error] - Message: Something Went Wrong in the GetMyRecipes
+System.Exception: User with id: undefined does'nt exist!
+   at recipe_planet.Services.AccountService.GetMyRecipesById(String id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\AccountService.cs:line 74
+   at recipe_planet.Controllers.AccountController.GetMyRecipes(String id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\AccountController.cs:line 103
+09/07/2021 00:42:25 +02:00 [Error] - Message: Something Went Wrong in the GetMyRecipes
+System.Exception: User with id: undefined does'nt exist!
+   at recipe_planet.Services.AccountService.GetMyRecipesById(String id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\AccountService.cs:line 74
+   at recipe_planet.Controllers.AccountController.GetMyRecipes(String id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\AccountController.cs:line 103
+09/07/2021 00:42:58 +02:00 [Error] - Message: Something Went Wrong in the GetMyRecipes
+System.Exception: User with id: undefined does'nt exist!
+   at recipe_planet.Services.AccountService.GetMyRecipesById(String id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Services\AccountService.cs:line 74
+   at recipe_planet.Controllers.AccountController.GetMyRecipes(String id) in C:\Users\Dario\source\repos\recipe_planet\recipe_planet\Controllers\AccountController.cs:line 103
